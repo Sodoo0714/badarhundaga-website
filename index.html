@@ -125,6 +125,17 @@ section h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:16px}
 .contact-grid .card p{margin-bottom:6px}
 .contact-grid .card a{font-weight:500}
 
+/* Map */
+.map-wrap{border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 12px 30px rgba(6,34,33,.10);margin-top:34px}
+.map-wrap iframe{display:block;width:100%;height:420px;border:0}
+.directions{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+@media(max-width:760px){.directions{grid-template-columns:1fr}}
+.map-btn{
+  display:inline-block;margin-top:14px;background:var(--teal-deep);color:#fff;
+  text-decoration:none;font-weight:500;font-size:15px;padding:12px 22px;border-radius:8px;
+}
+.map-btn:hover{background:#0B3534}
+
 /* Footer */
 footer{
   background:var(--teal-ink);color:#A9C2BC;padding:36px 0;font-size:14px;
@@ -276,6 +287,26 @@ footer a{color:#D5E5E0}
         <p>Утас: <a href="tel:+97670350888">7035-0888</a>, <a href="tel:+97699352335">9935-2335</a>, <a href="tel:+97699350105">9935-0105</a></p>
         <p><a href="https://www.facebook.com/profile.php?id=221185958767806" target="_blank" rel="noopener">Facebook хуудас</a> — зурвасаар холбогдох боломжтой</p>
         <p><strong>Бид 24 цагийн турш үйлчилж байна.</strong></p>
+      </div>
+    </div>
+
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=49.0368349,104.0498477&z=16&hl=mn&output=embed" title="Бадархундага Рашаан эмнэлгийн байршил" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+
+    <div class="directions">
+      <div class="card">
+        <h3>Хаанаас таних вэ?</h3>
+        <p>4 давхар, цайвар өнгийн барилга бөгөөд дээвэр дээрээ <strong>«БАДАРХУНДАГА-РАШААН МЕД»</strong> гэсэн том ногоон хаягтай тул холоос амархан танигдана.</p>
+      </div>
+      <div class="card">
+        <h3>Орц, зогсоол</h3>
+        <p>Амбулаторийн орц барилгын урд талд байрлана. Үйлчлүүлэгчдэд зориулсан үнэгүй авто зогсоолтой.</p>
+      </div>
+      <div class="card">
+        <h3>Замын заавар авах</h3>
+        <p>Доорх товчийг дарвал Google Maps таны байгаа газраас эмнэлэг хүртэлх замыг зааж өгнө.</p>
+        <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=49.0368349,104.0498477" target="_blank" rel="noopener">Зам заавар нээх</a>
       </div>
     </div>
   </div>
