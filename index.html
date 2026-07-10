@@ -43,11 +43,23 @@ header{
   background:var(--white);border-bottom:1px solid var(--line);
   position:sticky;top:0;z-index:50;
 }
-.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand img{width:46px;height:46px;border-radius:50%;flex:none}
-.brand-name{font-family:'Spectral',serif;font-weight:600;font-size:19px;color:var(--teal-ink);line-height:1.15}
-.brand-sub{font-size:11.5px;letter-spacing:.08em;color:var(--copper);text-transform:uppercase}
+.nav{display:flex;align-items:center;justify-content:space-between;height:92px}
+.brand{display:flex;align-items:center;gap:16px;text-decoration:none}
+.brand img{width:62px;height:62px;border-radius:50%;flex:none;box-shadow:0 2px 10px rgba(6,34,33,.18)}
+.brand-name{
+  font-family:'Spectral',serif;font-weight:600;font-size:24px;color:var(--teal-ink);
+  line-height:1.12;letter-spacing:.015em;display:block;
+}
+.brand-name .accent{color:var(--copper)}
+.brand-sub{
+  font-size:11px;letter-spacing:.22em;color:#5E736F;text-transform:uppercase;
+  display:block;margin-top:4px;font-weight:500;
+}
+@media(max-width:760px){
+  .brand img{width:50px;height:50px}
+  .brand-name{font-size:19px}
+  .brand-sub{letter-spacing:.14em}
+}
 nav.links{display:flex;gap:26px}
 nav.links a{text-decoration:none;font-size:15px;font-weight:500;color:var(--teal-ink)}
 nav.links a:hover{color:var(--copper)}
@@ -136,6 +148,30 @@ section h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:16px}
 }
 .map-btn:hover{background:#0B3534}
 
+/* Feedback form */
+.fb-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
+@media(max-width:820px){.fb-grid{grid-template-columns:1fr}}
+.fb-form{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:30px 28px}
+.alt .fb-form{background:var(--mist)}
+.fb-form label{display:block;font-size:14px;font-weight:600;color:var(--teal-ink);margin:16px 0 6px}
+.fb-form label:first-of-type{margin-top:0}
+.fb-form .opt{font-weight:400;color:#7A8C88;font-size:12.5px}
+.fb-form input,.fb-form textarea{
+  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;
+  font-family:inherit;font-size:15px;color:var(--body);background:var(--white);
+}
+.fb-form input:focus,.fb-form textarea:focus{outline:2px solid var(--copper);outline-offset:1px;border-color:var(--copper)}
+.fb-form textarea{min-height:130px;resize:vertical}
+.fb-form button{
+  margin-top:22px;background:var(--teal-deep);color:#fff;border:0;cursor:pointer;
+  font-family:inherit;font-weight:500;font-size:16px;padding:14px 30px;border-radius:8px;
+}
+.fb-form button:hover{background:#0B3534}
+.fb-thanks{
+  display:none;margin-top:18px;background:#E8F4EE;border:1px solid #BFE0CF;color:#1D5B3C;
+  padding:14px 16px;border-radius:8px;font-size:15px;
+}
+
 /* Footer */
 footer{
   background:var(--teal-ink);color:#A9C2BC;padding:36px 0;font-size:14px;
@@ -153,7 +189,7 @@ footer a{color:#D5E5E0}
     <a class="brand" href="#">
       <img src="img/logo.jpg" alt="Бадархундага Рашаан эмнэлгийн лого">
       <span>
-        <span class="brand-name">Бадархундага Рашаан</span><br>
+        <span class="brand-name">Бадархундага <span class="accent">Рашаан</span></span>
         <span class="brand-sub">Дотрын эмнэлэг · Эрдэнэт</span>
       </span>
     </a>
@@ -162,6 +198,7 @@ footer a{color:#D5E5E0}
       <a href="#tuuh">Бидний түүх</a>
       <a href="#zurag">Зургийн цомог</a>
       <a href="#emch">Эмч нар</a>
+      <a href="#setgegdel">Сэтгэгдэл</a>
       <a href="#kholboo">Холбоо барих</a>
     </nav>
   </div>
@@ -272,7 +309,41 @@ footer a{color:#D5E5E0}
   </div>
 </section>
 
-<section id="kholboo">
+<section id="setgegdel">
+  <div class="wrap fb-grid">
+    <div>
+      <div class="eyebrow">Үйлчлүүлэгчийн сэтгэгдэл</div>
+      <h2>Сэтгэгдэл, санал хүсэлтээ илгээгээрэй</h2>
+      <p style="margin-bottom:14px">Танд манай эмнэлгээр үйлчлүүлсэн туршлагаасаа хуваалцах, санал хүсэлт, талархал илэрхийлэх зүйл байвал доорх маягтаар илгээнэ үү. Сэтгэгдэл бүрийг бид анхааралтай уншиж, үйлчилгээгээ сайжруулахад ашигладаг.</p>
+      <p>Утасны дугаар, имэйл хаягаа үлдээх эсэх нь <strong>таны сонголт</strong> — хэрэв бид эргэж холбогдохыг хүсвэл үлдээгээрэй.</p>
+    </div>
+    <form class="fb-form" action="https://formsubmit.co/sodoo07@yahoo.com" method="POST" id="fbForm">
+      <input type="hidden" name="_subject" value="Вэбсайтаас ирсэн сэтгэгдэл — badarhundaga.mn">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://badarhundaga.mn/?sent=1#setgegdel">
+      <input type="text" name="_honey" style="display:none">
+      <label for="fb-name">Таны нэр <span class="opt">(заавал биш)</span></label>
+      <input type="text" id="fb-name" name="Нэр" placeholder="Жишээ: Болд">
+      <label for="fb-phone">Утасны дугаар <span class="opt">(заавал биш)</span></label>
+      <input type="tel" id="fb-phone" name="Утас" placeholder="99XX-XXXX">
+      <label for="fb-email">Имэйл <span class="opt">(заавал биш)</span></label>
+      <input type="email" id="fb-email" name="Имэйл" placeholder="tanii@mail.com">
+      <label for="fb-msg">Сэтгэгдэл, санал хүсэлт <span style="color:var(--copper)">*</span></label>
+      <textarea id="fb-msg" name="Сэтгэгдэл" required placeholder="Сэтгэгдлээ энд бичнэ үү..."></textarea>
+      <button type="submit">Илгээх</button>
+      <div class="fb-thanks" id="fbThanks">Сэтгэгдэл тань амжилттай илгээгдлээ. Танд баярлалаа! 🙏</div>
+    </form>
+  </div>
+</section>
+<script>
+if(new URLSearchParams(location.search).get('sent')==='1'){
+  var t=document.getElementById('fbThanks');
+  if(t){t.style.display='block';}
+}
+</script>
+
+<section class="alt" id="kholboo">
   <div class="wrap">
     <div class="eyebrow">Холбоо барих</div>
     <h2>Бидэнтэй холбогдох</h2>
