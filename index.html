@@ -9,7 +9,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Бадархундага Рашаан эмнэлэг">
 <meta property="og:description" content="Уламжлалт анагаах ухаан, орчин үеийн дотрын эмчилгээг нэг дор. Эрдэнэт хот.">
-<meta property="og:image" content="img/nuur.jpg">
+<meta property="og:image" content="https://badarhundaga.mn/img/nuur.jpg">
+<meta property="og:url" content="https://badarhundaga.mn/">
+<meta property="og:locale" content="mn_MN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://badarhundaga.mn/">
 <link rel="icon" href="img/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -397,18 +401,19 @@ footer{margin-top:clamp(36px,6vh,64px);padding-top:22px;border-top:1px solid rgb
       <p class="lead rv">Манай эмнэлгээр үйлчлүүлсэн туршлага, санал хүсэлт, талархлаа доорх маягтаар илгээнэ үү. Сэтгэгдэл бүрийг бид уншиж, үйлчилгээгээ сайжруулахад ашигладаг.</p>
       <p class="lead rv" style="--d:.08s">Утасны дугаар, имэйлээ үлдээх эсэх нь таны сонголт. Эргэж холбогдуулахыг хүсвэл үлдээгээрэй.</p>
     </div>
-    <form class="fb-form rv" onsubmit="event.preventDefault();var t=document.getElementById('fbThanks');t.hidden=false;t.textContent='Урьдчилсан хувилбарт илгээгдэхгүй. Жинхэнэ сайт дээр info@badarhundaga.mn руу очно.'" id="fbForm">
+    <form class="fb-form rv" id="fbForm" method="POST" action="https://formsubmit.co/info@badarhundaga.mn">
       <input type="hidden" name="_subject" value="Вэбсайтаас ирсэн сэтгэгдэл — badarhundaga.mn">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://badarhundaga.mn/?sent=1#setgegdel">
+      
       <input type="text" name="_honey" hidden tabindex="-1" autocomplete="off">
       <div class="f"><label for="fb-name">Таны нэр <small>(заавал биш)</small></label><input type="text" id="fb-name" name="Нэр" placeholder="Жишээ: Болд"></div>
       <div class="f"><label for="fb-phone">Утасны дугаар <small>(заавал биш)</small></label><input type="tel" id="fb-phone" name="Утас" placeholder="99XX-XXXX"></div>
       <div class="f full"><label for="fb-email">Имэйл <small>(заавал биш)</small></label><input type="email" id="fb-email" name="Имэйл" placeholder="tanii@mail.com"></div>
       <div class="f full"><label for="fb-msg">Сэтгэгдэл, санал хүсэлт *</label><textarea id="fb-msg" name="Сэтгэгдэл" required placeholder="Сэтгэгдлээ энд бичнэ үү..."></textarea></div>
       <button type="submit" class="btn btn-green">Илгээх</button>
-      <div class="fb-thanks" id="fbThanks" hidden>Сэтгэгдэл тань амжилттай илгээгдлээ. Танд баярлалаа!</div>
+      <div class="fb-thanks" id="fbThanks" role="status" aria-live="polite" hidden>Сэтгэгдэл тань амжилттай илгээгдлээ. Танд баярлалаа!</div>
     </form>
   </div>
 </section>
@@ -458,6 +463,19 @@ footer{margin-top:clamp(36px,6vh,64px);padding-top:22px;border-top:1px solid rgb
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
   // safety: never leave content hidden
   setTimeout(function(){document.querySelectorAll('.hero .rv').forEach(function(el){el.classList.add('in');});},60);
+
+
+  // feedback form: send without leaving the page (shows a phone-number fallback message on failure)
+  var fbForm=document.getElementById('fbForm');
+  if(fbForm&&window.fetch){ fbForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var th=document.getElementById('fbThanks'), btn=fbForm.querySelector('button'); btn.disabled=true;
+    fetch('https://formsubmit.co/ajax/info@badarhundaga.mn',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(fbForm)})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){ if(d&&d.success==='false') throw 0; th.textContent='Сэтгэгдэл тань амжилттай илгээгдлээ. Танд баярлалаа!'; th.hidden=false; fbForm.reset(); })
+      .catch(function(){ th.textContent='Илгээж чадсангүй. Дахин оролдох эсвэл 7035-0888 дугаарт залгана уу.'; th.hidden=false; })
+      .then(function(){ btn.disabled=false; });
+  }); }
 
   // thank-you note after the form service sends the visitor back
   try{ if(new URLSearchParams(location.search).get('sent')==='1'){ var th=document.getElementById('fbThanks'); if(th) th.hidden=false; } }catch(e){}
